@@ -3,21 +3,20 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+
 // use App\Entity\Enum\RoleType;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use App\Controller\FindUserById;
 use App\Entity\Enum\UserState;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use ApiPlatform\Metadata\Get;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`user`')]
-#[ApiResource]
-/**
- * @ApiResource(
- *     collectionOperations={"get"},
- *     itemOperations={"get", "put", "delete"}
- * )
- */
+#[ORM\Table(name: '`users`')]
 class User
 {
     #[ORM\Id]

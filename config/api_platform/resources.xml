@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- api/config/api_platform/resources.xml -->
+
+<resources
+        xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0
+        https://api-platform.com/schema/metadata/resources-3.0.xsd">
+    <resource class="App\Entity\User">
+        <normalizationContext>
+            <values>
+                <value name="groups">
+                    <values>
+                        <value>get</value>
+                    </values>
+                </value>
+            </values>
+        </normalizationContext>
+        <operations>
+            <operation class="ApiPlatform\Metadata\Get" name="get_users" uriTemplate="/users/{id}"
+                       controller="App\Controller\FindUserById"/>
+            </operations>
+    </resource>
+    <resource class="App\Entity\Company">
+
+
+        <normalizationContext>
+            <values>
+                <value name="groups">
+                    <values>
+                        <value>get</value>
+                    </values>
+                </value>
+            </values>
+        </normalizationContext>
+
+    </resource>
+
+
+</resources>
