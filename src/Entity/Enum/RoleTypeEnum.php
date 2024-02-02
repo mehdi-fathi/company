@@ -5,9 +5,9 @@ namespace App\Entity\Enum;
 
 enum RoleTypeEnum: string
 {
-    case USER = 'ROLE_USER';
-    case COMPANY_ADMIN = 'ROLE_COMPANY_ADMIN';
-    case SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
+    case USER = 'user';
+    case COMPANY_ADMIN = 'company_admin';
+    case SUPER_ADMIN = 'super_admin';
 
     /**
      * @return string

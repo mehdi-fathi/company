@@ -10,6 +10,7 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use App\Controller\FindUserById;
+use App\Entity\Enum\RoleTypeEnum;
 use App\Entity\Enum\UserState;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
