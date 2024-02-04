@@ -17,9 +17,28 @@
             </values>
         </normalizationContext>
         <operations>
-            <operation class="ApiPlatform\Metadata\Get" name="get_users" uriTemplate="/users/{id}"
+            <operation class="ApiPlatform\Metadata\Get"
+                       name="get_user"
+                       uriTemplate="/users/{id}"
                        controller="App\Controller\FindUserById"/>
-            </operations>
+            <operation class="ApiPlatform\Metadata\Post"
+                       name="create_user" uriTemplate="/users"
+                       controller="App\Controller\CreateUser"
+                       input="App\Dto\createUserDTO"
+                       output="App\Dto\createUserDTO"
+                       processor=""
+            />
+        </operations>
+        <normalizationContext>
+            <values>
+                <value name="groups">
+                    <values>
+                        <value>createUserDTO</value>
+                    </values>
+                </value>
+            </values>
+        </normalizationContext>
+
     </resource>
     <resource class="App\Entity\Company">
 
