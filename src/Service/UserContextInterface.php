@@ -8,7 +8,7 @@ interface UserContextInterface
      * @param int $userId
      * @return void
      */
-    public function setUserRole(int $userId): void;
+    public function setCurrentUser(int $userId): void;
 
     /**
      * @return \App\Entity\User

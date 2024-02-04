@@ -7,20 +7,18 @@ class RoleUserType extends AbstractEnumType
 {
     protected string $name = 'role_user';
     protected array $values = [];
-    protected static array $options = array(
-        RoleTypeEnum::USER,
-        RoleTypeEnum::COMPANY_ADMIN,
-        RoleTypeEnum::SUPER_ADMIN
-    );
+    protected array $options = [];
 
     function __init()
     {
-        $this->values = self::$options;
     }
 
     public function getValidValues(): array
     {
-        return self::$options;
+        $this->options[] = RoleTypeEnum::USER->getValue();
+        $this->options[] = RoleTypeEnum::COMPANY_ADMIN->getValue();
+        $this->options[] = RoleTypeEnum::SUPER_ADMIN->getValue();
+        return $this->options;
     }
 
 }

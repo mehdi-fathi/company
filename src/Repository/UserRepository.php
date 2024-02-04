@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,7 +17,12 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+
+    /**
+     * @param \Doctrine\Persistence\ManagerRegistry $registry
+     * @param \Doctrine\ORM\EntityManagerInterface $entityManager
+     */
+    public function __construct(ManagerRegistry $registry, private EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, User::class);
     }
@@ -33,6 +39,35 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
             ->setParameter('i_user_id', $user_id)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    /**
+     * @param string $name
+     * @param int $companyId
+     * @param string $role
+     * @return void
+     */
+    public function create(string $name, int $companyId, string $role)
+    {
+        // Create a new User entity
+        $user = new User();
+        $user->setName($name);
+
+        $user->setCompanyId($companyId);
+        $user->setRole($role);
+
+        $this->persistEntity($user);
+
+    }
+
+    /**
+     * @param \App\Entity\User $user
+     * @return void
+     */
+    private function persistEntity(User $user): void
+    {
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
     }
 
 }

@@ -5,23 +5,19 @@ namespace App\Service;
 use App\Entity\Enum\RoleTypeEnum;
 use App\Entity\User;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  *
  */
 final class UserService
 {
-    /**
-     * @var \App\Repository\UserRepository
-     */
-    private UserRepository $userRepository;
 
     /**
      * @param \App\Repository\UserRepository $userRepository
      */
-    public function __construct(UserRepository $userRepository)
+    public function __construct(private UserRepository $userRepository)
     {
-        $this->userRepository = $userRepository;
     }
 
     /**
@@ -51,5 +47,16 @@ final class UserService
         }
 
         return $userData;
+    }
+
+    /**
+     * @param string $name
+     * @param int $companyId
+     * @param string $role
+     * @return void
+     */
+    public function save(string $name, int $companyId, string $role)
+    {
+        $this->userRepository->create($name, $companyId, $role);
     }
 }

@@ -20,7 +20,9 @@ class UserContextMiddleware
 
         $request = $event->getRequest();
 
-        $this->userContext->setUserRole($request->get('user_id'));
+        if($request->get('user_id')){
+            $this->userContext->setCurrentUser($request->get('user_id'));
+        }
 
         // Your middleware logic goes here
     }
