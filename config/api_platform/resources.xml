@@ -24,8 +24,8 @@
             <operation class="ApiPlatform\Metadata\Post"
                        name="create_user" uriTemplate="/users"
                        controller="App\Controller\CreateUser"
-                       input="App\Dto\createUserDTO"
-                       output="App\Dto\createUserDTO"
+                       input="App\Dto\CreateUserDTO"
+                       output="App\Dto\CreateUserDTO"
                        processor=""
             />
         </operations>
