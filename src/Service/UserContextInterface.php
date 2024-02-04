@@ -11,7 +11,7 @@ interface UserContextInterface
     public function setCurrentUser(int $userId): void;
 
     /**
-     * @return \App\Entity\User
+     * @return \App\Entity\User|null
      */
-    public function getCurrentUser(): \App\Entity\User;
+    public function getCurrentUser(): \App\Entity\User|null;
 }

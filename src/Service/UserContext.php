@@ -11,7 +11,7 @@ use App\Entity\User;
  */
 class UserContext implements UserContextInterface
 {
-    private User $currentUser;
+    private ?User $currentUser = null;
 
     /**
      * @param \App\Service\UserService $userService
@@ -30,10 +30,20 @@ class UserContext implements UserContextInterface
     }
 
     /**
-     * @return \App\Entity\User
+     * @return \App\Entity\User|null
      */
-    public function getCurrentUser(): User
+    public function getCurrentUser(): User|null
     {
         return $this->currentUser;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getCurrentUserRole(): string|null
+    {
+        return $this->getCurrentUser()?->getRole();
+    }
+
+
 }
