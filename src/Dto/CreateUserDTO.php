@@ -17,18 +17,18 @@ class CreateUserDTO
     #[ApiProperty(default: "Mehdi")]
     #[Assert\NotBlank(message: "Name cannot be blank.")]
     #[Assert\Type('string')]
-    #[Assert\Length(min: 3, max: 255, exactMessage: "Name cannot be blank.")]
+    #[Assert\Length(min: 3, max: 100, exactMessage: "Name cannot be blank.")]
     public string $name;
     /**
      * @var int
      */
     #[ApiProperty(default: 1)]
-    public int $companyId;
+    public int $company_id;
 
     /**
      * @var string
      */
 
-    #[ApiProperty(default: ['user','admin','super_admin'])]
+    #[ApiProperty(default: 'user', example: ['user', 'admin', 'super_admin'])]
     public string $role;
 }

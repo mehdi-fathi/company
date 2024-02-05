@@ -40,11 +40,11 @@ class CreateUser extends AbstractController
      */
     public function __invoke(#[MapRequestPayload] CreateUserDTO $dataDto): JsonResponse
     {
-        // HelperService::checkHasAccessCreateUserException($this->userContext->getCurrentUserRole());
+        HelperService::checkHasAccessCreateUserException($this->userContext->getCurrentUserRole());
 
         $this->userService->save(
             name: $dataDto->name,
-            companyId: $dataDto->companyId,
+            companyId: $dataDto->company_id,
             role: $dataDto->role,
         );
 

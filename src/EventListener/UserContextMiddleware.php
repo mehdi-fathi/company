@@ -10,21 +10,34 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ *
+ */
 class UserContextMiddleware
 {
+    /**
+     * @var \App\Service\UserContextInterface
+     */
     private $userContext;
 
+    /**
+     * @param \App\Service\UserContextInterface $userContext
+     */
     public function __construct(UserContextInterface $userContext)
     {
         $this->userContext = $userContext;
     }
 
+    /**
+     * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
+     * @return void
+     */
     public function onKernelRequest(RequestEvent $event)
     {
 
         $request = $event->getRequest();
 
-        $currentUserId = $request->get('current_user_id');
+        $currentUserId = $request->headers->get('CurrentUser');
 
         if (!empty($currentUserId)) {
             $this->userContext->setCurrentUser($currentUserId);
@@ -32,13 +45,11 @@ class UserContextMiddleware
 
         if (!$this->userContext->getCurrentUser()) {
 
-            // $response = new JsonResponse([
-            //     'message' => 'You must pass current_user_id to detect your user.',
-            //     'code' => $currentUserId,
-            // ]);
-            // $event->setResponse($response);
+            $response = new JsonResponse([
+                'message' => 'You must pass CurrentUser header to detect your user.',
+                'code' => $currentUserId,
+            ]);
+            $event->setResponse($response);
         }
-
-        // Your middleware logic goes here
     }
 }

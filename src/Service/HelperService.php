@@ -36,7 +36,7 @@ final class HelperService
     public static function checkHasAccessCreateUserException(?string $currentUserRole): void
     {
         if (!self::HasAccessCreateUser($currentUserRole)) {
-            throw new NotFoundHttpException("Not found");
+            throw new NotFoundHttpException("You don't have access.");
         }
     }
 }
