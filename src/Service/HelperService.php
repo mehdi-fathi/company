@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Enum\RoleTypeEnum;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  *
@@ -32,11 +32,12 @@ final class HelperService
     /**
      * @param string|null $currentUserRole
      * @return void
+     * @throws \App\Exception\AccessDeniedException
      */
     public static function checkHasAccessCreateUserException(?string $currentUserRole): void
     {
         if (!self::HasAccessCreateUser($currentUserRole)) {
-            throw new NotFoundHttpException("You don't have access.");
+            throw new \App\Exception\AccessDeniedException();
         }
     }
 }

@@ -4,11 +4,12 @@ namespace App\EventListener;
 
 use App\Service\UserContext;
 use App\Service\UserContextInterface;
-use http\Env\Response;
 use Symfony\Component\HttpFoundation\Exception\JsonException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\Response;
+
 
 /**
  *
@@ -43,11 +44,11 @@ class UserContextMiddleware
             $this->userContext->setCurrentUser($currentUserId);
         }
 
-        if (!$this->userContext->getCurrentUser()) {
+        if (!$this->userContext->getCurrentUser() && $request->getPathInfo() != '/api') {
 
             $response = new JsonResponse([
-                'message' => 'You must pass CurrentUser header to detect your user.',
-                'code' => $currentUserId,
+                'message' => 'You must send CurrentUser header to detect your user.',
+                'code' => Response::HTTP_UNAUTHORIZED,
             ]);
             $event->setResponse($response);
         }
