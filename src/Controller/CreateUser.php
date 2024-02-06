@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Dto\CreateUserDTO;
 use App\Entity\User;
+use App\Response\ApiResponse;
 use App\Service\HelperService;
 use App\Service\UserContextInterface;
 use App\Service\UserService;
@@ -37,6 +38,7 @@ class CreateUser extends AbstractController
     }
 
     /**
+     * @throws \App\Exception\AccessDeniedException
      */
     public function __invoke(#[MapRequestPayload] CreateUserDTO $dataDto): JsonResponse
     {
@@ -48,7 +50,9 @@ class CreateUser extends AbstractController
             role: $dataDto->role,
         );
 
-        return new JsonResponse('User has been saved.', Response::HTTP_CREATED);
+        $res = ApiResponse::getResponse(true, 'User has been saved successfully.');
+
+        return new JsonResponse($res, Response::HTTP_CREATED);
 
     }
 

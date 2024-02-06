@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Response\ApiResponse;
+use App\Serializer\ApiResponseSerializer;
 use App\Service\UserContext;
 use App\Service\UserContextInterface;
 use App\Service\UserService;
@@ -23,6 +25,9 @@ class FindUserById extends AbstractController
     {
     }
 
+    /**
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function __invoke($id)
     {
         $currentUser = $this->userContext->getCurrentUser();
@@ -32,12 +37,13 @@ class FindUserById extends AbstractController
             $currentUser->getCompanyId(),
         );
 
-        $serializedData = $this->serializer->serialize($user, 'json', [
+        $res = ApiResponse::getResponse(true, '', $user);
+
+        $serializedData = $this->serializer->serialize($res, 'json', [
             'groups' => 'get',
         ]);
 
         return new JsonResponse($serializedData, 200, [], true);
 
-        return $user;
     }
 }
