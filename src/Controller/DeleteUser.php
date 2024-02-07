@@ -42,7 +42,7 @@ class DeleteUser extends AbstractController
      */
     public function __invoke($id): JsonResponse
     {
-        HelperService::checkHasAccessCreateUserException($this->userContext->getCurrentUserRole());
+        HelperService::checkHasAccessDeleteUserException($this->userContext->getCurrentUserRole());
 
         $this->userService->delete($id);
 
