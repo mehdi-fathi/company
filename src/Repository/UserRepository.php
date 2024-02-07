@@ -70,4 +70,19 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
         $this->entityManager->flush();
     }
 
+    /**
+     * @param $userId
+     * @return void
+     */
+    public function delete($userId): void
+    {
+        $entity = $this->findOneBy(['id' => $userId]);
+
+        if ($entity) {
+            $this->entityManager->remove($entity);
+            $this->entityManager->flush();
+        }
+
+    }
+
 }

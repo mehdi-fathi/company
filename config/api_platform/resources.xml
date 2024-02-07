@@ -28,6 +28,11 @@
                        output="App\Dto\CreateUserDTO"
                        processor=""
             />
+            <operation class="ApiPlatform\Metadata\Delete"
+                       name="delete_user"
+                       uriTemplate="/users/{id}"
+                       controller="App\Controller\DeleteUser"
+            />
         </operations>
         <normalizationContext>
             <values>

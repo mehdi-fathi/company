@@ -4,8 +4,10 @@
 namespace App\EventListener;
 
 use App\Exception\AccessDeniedException;
+use App\Response\ApiResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  *
@@ -20,9 +22,13 @@ class NotFoundAccessExceptionListener
     {
         $exception = $event->getThrowable();
 
-        if ($exception instanceof AccessDeniedException) {
-            $response = new JsonResponse(['error' => $exception->getMessage()], JsonResponse::HTTP_NOT_FOUND);
+        if ($exception instanceof AccessDeniedException || $exception instanceof NotFoundHttpException) {
+
+            $res = ApiResponse::getResponse(false, null, null, $exception->getMessage());
+            $response = new JsonResponse($res, $exception->getStatusCode());
+
             $event->setResponse($response);
+
         }
     }
 }
