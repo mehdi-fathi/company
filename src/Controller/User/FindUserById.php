@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\User;
 
-use App\Entity\User;
 use App\Response\ApiResponse;
 use App\Serializer\ApiResponseSerializer;
-use App\Service\UserContext;
 use App\Service\UserContextInterface;
 use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

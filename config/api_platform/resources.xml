@@ -20,10 +20,10 @@
             <operation class="ApiPlatform\Metadata\Get"
                        name="get_user"
                        uriTemplate="/users/{id}"
-                       controller="App\Controller\FindUserById"/>
+                       controller="App\Controller\User\FindUserById"/>
             <operation class="ApiPlatform\Metadata\Post"
                        name="create_user" uriTemplate="/users"
-                       controller="App\Controller\CreateUser"
+                       controller="App\Controller\User\CreateUser"
                        input="App\Dto\CreateUserDTO"
                        output="App\Dto\CreateUserDTO"
                        processor=""
@@ -31,7 +31,7 @@
             <operation class="ApiPlatform\Metadata\Delete"
                        name="delete_user"
                        uriTemplate="/users/{id}"
-                       controller="App\Controller\DeleteUser"
+                       controller="App\Controller\User\DeleteUser"
             />
         </operations>
         <normalizationContext>

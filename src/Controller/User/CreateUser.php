@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\User;
 
 use App\Dto\CreateUserDTO;
-use App\Entity\User;
+use App\Entity\Enum\RoleTypeEnum;
 use App\Response\ApiResponse;
 use App\Service\HelperService;
 use App\Service\UserContextInterface;
 use App\Service\UserService;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -21,7 +20,7 @@ use Symfony\Component\Serializer\SerializerInterface;
  *
  */
 #[AsController]
-class DeleteUser extends AbstractController
+class CreateUser extends AbstractController
 {
 
     /**
@@ -40,17 +39,23 @@ class DeleteUser extends AbstractController
     /**
      * @throws \App\Exception\AccessDeniedException
      */
-    public function __invoke($id): JsonResponse
+    public function __invoke(#[MapRequestPayload] CreateUserDTO $dataDto): JsonResponse
     {
-        HelperService::checkHasAccessDeleteUserException($this->userContext->getCurrentUserRole());
+        HelperService::checkHasAccessCreateUserException($this->userContext->getCurrentUserRole());
 
-        $this->userService->delete($id);
+        if (HelperService::isRoleCompanyAdmin($this->userContext->getCurrentUserRole())) {
+            $dataDto->role = RoleTypeEnum::USER->getValue();
+        }
 
-        $msg = 'The user has been deleted successfully.';
+        $this->userService->save(
+            name: $dataDto->name,
+            companyId: $dataDto->company_id,
+            role: $dataDto->role,
+        );
 
-        $res = ApiResponse::getResponse(true, $msg);
+        $res = ApiResponse::getResponse(true, 'User has been saved successfully.');
 
-        return new JsonResponse($res, Response::HTTP_OK);
+        return new JsonResponse($res, Response::HTTP_CREATED);
 
     }
 
