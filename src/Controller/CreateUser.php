@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Dto\CreateUserDTO;
+use App\Entity\Enum\RoleTypeEnum;
 use App\Entity\User;
 use App\Response\ApiResponse;
 use App\Service\HelperService;
@@ -43,6 +44,10 @@ class CreateUser extends AbstractController
     public function __invoke(#[MapRequestPayload] CreateUserDTO $dataDto): JsonResponse
     {
         HelperService::checkHasAccessCreateUserException($this->userContext->getCurrentUserRole());
+
+        if (HelperService::isRoleCompanyAdmin($this->userContext->getCurrentUserRole())) {
+            $dataDto->role = RoleTypeEnum::USER->getValue();
+        }
 
         $this->userService->save(
             name: $dataDto->name,

@@ -21,6 +21,15 @@ final class HelperService
     }
 
     /**
+     * @param string $currentUserRole
+     * @return bool
+     */
+    public static function isRoleCompanyAdmin(string $currentUserRole): bool
+    {
+        return ($currentUserRole == RoleTypeEnum::COMPANY_ADMIN->getValue());
+    }
+
+    /**
      * @param string|null $currentUserRole
      * @return bool
      */

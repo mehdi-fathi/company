@@ -3,6 +3,9 @@
 namespace App\Dto;
 
 
+use App\Entity\Enum\RoleTypeEnum;
+use App\Service\HelperService;
+use App\Service\UserContextInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use ApiPlatform\Metadata\ApiResource;
@@ -19,6 +22,7 @@ class CreateUserDTO
     #[Assert\Type('string')]
     #[Assert\Length(min: 3, max: 100, exactMessage: "Name cannot be blank.")]
     public string $name;
+
     /**
      * @var int
      */
@@ -29,6 +33,7 @@ class CreateUserDTO
      * @var string
      */
 
-    #[ApiProperty(default: 'user', example: ['user', 'admin', 'super_admin'])]
+    #[ApiProperty(default: 'user', example: ['user', 'company_admin', 'super_admin', null])]
+    #[Assert\Choice(choices: ['user', 'company_admin', 'super_admin', null])]
     public string $role;
 }
