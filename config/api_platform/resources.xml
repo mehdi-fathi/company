@@ -51,6 +51,10 @@
                        name="get_company"
                        uriTemplate="/company/{id}"
                        controller="App\Controller\Company\FindCompanyById"/>
+            <operation class="ApiPlatform\Metadata\Post"
+                       name="create_company"
+                       uriTemplate="/companies"
+                       controller="App\Controller\Company\CreateCompany"/>
         </operations>
 
         <normalizationContext>

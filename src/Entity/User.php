@@ -11,9 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
 class User
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: "integer")]
+    #[ORM\GeneratedValue(strategy : "AUTO")]
+    private int $id;
 
     #[ORM\Column(length: 100)]
     private ?string $name = null;

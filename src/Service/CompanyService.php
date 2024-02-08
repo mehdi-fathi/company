@@ -46,13 +46,11 @@ final class CompanyService
 
     /**
      * @param string $name
-     * @param int $companyId
-     * @param string $role
      * @return void
      */
-    public function save(string $name, int $companyId, string $role)
+    public function save(string $name)
     {
-        $this->companyRepository->create($name, $companyId, $role);
+        $this->companyRepository->create($name);
     }
 
     /**

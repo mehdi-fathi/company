@@ -49,6 +49,15 @@ final class HelperService
 
     /**
      * @param string|null $currentUserRole
+     * @return bool
+     */
+    public static function HasAccessCreateCompany(?string $currentUserRole): bool
+    {
+        return ($currentUserRole == RoleTypeEnum::SUPER_ADMIN->getValue());
+    }
+
+    /**
+     * @param string|null $currentUserRole
      * @return void
      * @throws \App\Exception\AccessDeniedException
      */
@@ -67,6 +76,18 @@ final class HelperService
     public static function checkHasAccessDeleteUserException(?string $currentUserRole): void
     {
         if (!self::HasAccessDeleteUser($currentUserRole)) {
+            throw new AccessDeniedException();
+        }
+    }
+
+    /**
+     * @param string|null $currentUserRole
+     * @return void
+     * @throws \App\Exception\AccessDeniedException
+     */
+    public static function checkHasAccessCreateCompanyException(?string $currentUserRole): void
+    {
+        if (!self::HasAccessCreateCompany($currentUserRole)) {
             throw new AccessDeniedException();
         }
     }
