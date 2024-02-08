@@ -46,7 +46,12 @@
 
     </resource>
     <resource class="App\Entity\Company">
-
+        <operations>
+            <operation class="ApiPlatform\Metadata\Get"
+                       name="get_company"
+                       uriTemplate="/company/{id}"
+                       controller="App\Controller\Company\FindCompanyById"/>
+        </operations>
 
         <normalizationContext>
             <values>
