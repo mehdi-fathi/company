@@ -23,9 +23,9 @@ final class UserService
 
     /**
      * @param int $userId
-     * @return \App\Entity\User
+     * @return \App\Entity\User|null
      */
-    public function findUserById(int $userId): User
+    public function findUserById(int $userId): ?User
     {
         $user = $this->userRepository->find($userId);
 

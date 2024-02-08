@@ -6,6 +6,8 @@ use App\Story\DefaultCompanyStory;
 use App\Story\DefaultUserStory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 
 class AppFixtures extends Fixture
 {
@@ -15,7 +17,6 @@ class AppFixtures extends Fixture
         // $manager->persist($product);
 
         // $manager->flush();
-
 
         DefaultCompanyStory::load();
         DefaultUserStory::load();

@@ -12,7 +12,7 @@ class Company
 {
     #[ORM\Id]
     #[ORM\Column(type: "integer")]
-    #[ORM\GeneratedValue(strategy : "AUTO")]
+    #[ORM\GeneratedValue(strategy : "SEQUENCE")]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]

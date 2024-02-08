@@ -19,12 +19,12 @@ abstract class AbstractEnumType extends Type
         return $this->schema . ".\"" . $this->getName() . "\"";
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    public function convertToPHPValue($value, AbstractPlatform $platform): mixed
     {
         return $value;
     }
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
         if (!in_array($value, $this->getValidValues())) {
             throw new \InvalidArgumentException("Invalid '" . $this->name . "' value.");

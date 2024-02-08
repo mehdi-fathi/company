@@ -13,10 +13,6 @@ use Symfony\Component\Validator\Constraint;
      * @var string
      */
     public $message = '{{ value }} does not exist in {{ entityName }}.';
-    /**
-     * @var string[]
-     */
-    public $groups = ['Default'];
 
 
     /**
