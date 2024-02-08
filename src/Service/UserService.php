@@ -15,8 +15,9 @@ final class UserService
 
     /**
      * @param \App\Repository\UserRepository $userRepository
+     * @param \App\Service\CompanyService $companyService
      */
-    public function __construct(private UserRepository $userRepository)
+    public function __construct(private UserRepository $userRepository, private CompanyService $companyService)
     {
     }
 
@@ -53,11 +54,17 @@ final class UserService
      * @param string $name
      * @param int $companyId
      * @param string $role
-     * @return void
+     * @return bool
      */
-    public function save(string $name, int $companyId, string $role)
+    public function save(string $name, int $companyId, string $role): bool
     {
-        $this->userRepository->create($name, $companyId, $role);
+        $company = $this->companyService->findByCompanyId($companyId);
+        if (!empty($company)) {
+            $this->userRepository->create($name, $companyId, $role);
+            return true;
+        }
+        return false;
+
     }
 
     /**

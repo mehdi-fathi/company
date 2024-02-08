@@ -10,6 +10,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\ApiProperty;
+use App\Validator as AcmeAssert;
+
 
 /**
  *
@@ -27,6 +29,7 @@ class CreateUserDTO
      * @var int
      */
     #[ApiProperty(default: 1)]
+    #[AcmeAssert\UniqueForeignKey(foreignKey: "id", referencedEntity: "App/Entity/Company", entityName: "companies")]
     public int $company_id;
 
     /**

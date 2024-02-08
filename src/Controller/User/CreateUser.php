@@ -47,13 +47,18 @@ class CreateUser extends AbstractController
             $dataDto->role = RoleTypeEnum::USER->getValue();
         }
 
-        $this->userService->save(
+        $out = $this->userService->save(
             name: $dataDto->name,
             companyId: $dataDto->company_id,
             role: $dataDto->role,
         );
+        $msg = 'false';
 
-        $res = ApiResponse::getResponse(true, 'User has been saved successfully.');
+        if ($out) {
+            $msg = 'User has been saved successfully.';
+        }
+
+        $res = ApiResponse::getResponse($out, $msg);
 
         return new JsonResponse($res, Response::HTTP_CREATED);
 

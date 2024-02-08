@@ -23,21 +23,10 @@ final class CompanyService
     }
 
     /**
-     * @param int $userId
-     * @return \App\Entity\User
-     */
-    public function findUserById(int $userId): User
-    {
-        $user = $this->companyRepository->find($userId);
-
-        return $user;
-    }
-
-    /**
      * @param int $companyId
-     * @return \App\Entity\Company
+     * @return \App\Entity\Company|null
      */
-    public function findByCompanyId(int $companyId): Company
+    public function findByCompanyId(int $companyId): Company|null
     {
         $companyData = $this->companyRepository->find($companyId);
 

@@ -13,7 +13,7 @@ use ApiPlatform\Metadata\ApiProperty;
 class CreateCompanyDTO
 {
 
-    #[ApiProperty(default: "Mehdi")]
+    #[ApiProperty(default: "Apple")]
     #[Assert\NotBlank(message: "Name cannot be blank.")]
     #[Assert\Type('string')]
     #[Assert\Length(min: 3, max: 100, exactMessage: "Name cannot be blank.")]
