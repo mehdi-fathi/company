@@ -1,7 +1,7 @@
 
 # Company Project
 
-This project is a restfull api for some operation related companies and users.
+This project is a RESTful API for some operations related companies and users.
 
 - Database: PostgreSQL
 - PHP : 8.1
