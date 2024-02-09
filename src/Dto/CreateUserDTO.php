@@ -31,7 +31,6 @@ class CreateUserDTO
     /**
      * @var string
      */
-
     #[ApiProperty(default: 'user', example: ['user', 'company_admin', 'super_admin', null])]
     #[Assert\Choice(choices: ['user', 'company_admin', 'super_admin', null])]
     public string $role;

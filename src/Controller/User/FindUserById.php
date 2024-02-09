@@ -27,7 +27,7 @@ class FindUserById extends AbstractController
     /**
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function __invoke($id)
+    public function __invoke(int $id)
     {
         $currentUser = $this->userContext->getCurrentUser();
         $user = $this->userService->findUserByIdBasedRole(
