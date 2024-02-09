@@ -1,13 +1,7 @@
 
-
-
-
-bin/console doctrine:migrations:migrate
-
-
 # Company Project
 
-I assumed this project would be a large scale project, so I tried to implement robust and engineering structure.
+This project is a restfull api for some operation related companies and users.
 
 - Database: PostgreSQL
 - PHP : 8.1
