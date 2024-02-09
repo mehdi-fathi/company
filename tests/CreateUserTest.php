@@ -12,7 +12,7 @@ use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
 
-class CreateUserTest extends ApiTestCase
+class CreateUserTest extends ApiTestCaseCustom
 {
     use  ResetDatabase, Factories;
 
@@ -138,20 +138,6 @@ class CreateUserTest extends ApiTestCase
 
     }
 
-    private function getSuperAdminId()
-    {
-        return UserFactory::find(['role' => RoleTypeEnum::SUPER_ADMIN->getValue()])->getId();
-    }
-
-    private function getCompanyAdminId()
-    {
-        return UserFactory::find(['role' => RoleTypeEnum::COMPANY_ADMIN->getValue()])->getId();
-    }
-
-    private function getUserId()
-    {
-        return UserFactory::find(['role' => RoleTypeEnum::USER->getValue()])->getId();
-    }
 }
 
 

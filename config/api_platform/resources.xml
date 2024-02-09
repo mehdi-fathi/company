@@ -49,7 +49,7 @@
         <operations>
             <operation class="ApiPlatform\Metadata\Get"
                        name="get_company"
-                       uriTemplate="/company/{id}"
+                       uriTemplate="/companies/{id}"
                        controller="App\Controller\Company\FindCompanyById"/>
             <operation class="ApiPlatform\Metadata\Post"
                        name="create_company"

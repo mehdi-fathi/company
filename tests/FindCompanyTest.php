@@ -4,7 +4,9 @@ namespace App\Tests;
 
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 
+use App\Entity\Company;
 use App\Entity\Enum\RoleTypeEnum;
+use App\Entity\User;
 use App\Factory\CompanyFactory;
 use App\Factory\UserFactory;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +14,7 @@ use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
 
-class DeleteUserTest extends ApiTestCaseCustom
+class FindCompanyTest extends ApiTestCaseCustom
 {
     use  ResetDatabase, Factories;
 
@@ -20,6 +22,8 @@ class DeleteUserTest extends ApiTestCaseCustom
     {
 
         parent::setUp();
+
+        CompanyFactory::createMany(1);
 
         UserFactory::createMany(1, [
             'company_id' => 0,
@@ -42,43 +46,27 @@ class DeleteUserTest extends ApiTestCaseCustom
             'name' => 'user',
             'role' => RoleTypeEnum::USER->getValue(),
         ]);
+
+
     }
 
-    public function testDeleteUserBySuperAdmin(): void
+    public function testFindCompanyById(): void
     {
-        CompanyFactory::createMany(1);
+        $companyId = CompanyFactory::first()->getId();
 
-        $userId = $this->getUserId();
-
-        $response = static::createClient()->request('DELETE', '/api/users/' . $userId, [
+        $response = static::createClient()->request('GET', '/api/companies/' . $companyId, [
             'headers' => [
-                'CurrentUser' => $this->getSuperAdminId(),
+                'CurrentUser' => 1,
                 'Content-Type' => 'application/ld+json',
-            ],
+            ]
         ]);
 
         $this->assertResponseIsSuccessful();
 
-        $this->assertSame([], UserFactory::findBy(['id' => $userId]));
+        $this->assertMatchesResourceItemJsonSchema(Company::class);
 
     }
 
-    public function testOthersCantAccess(): void
-    {
-        CompanyFactory::createMany(1);
-
-        $userId = $this->getUserId();
-
-        $response = static::createClient()->request('DELETE', '/api/users/' . $userId, [
-            'headers' => [
-                'CurrentUser' => $this->getCompanyAdminId(),
-                'Content-Type' => 'application/ld+json',
-            ],
-        ]);
-
-        $this->assertResponseStatusCodeSame(Response::HTTP_UNAUTHORIZED);
-
-    }
 
 }
 
