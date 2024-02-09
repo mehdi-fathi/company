@@ -33,8 +33,6 @@ final class DefaultUserStory extends Story
             'role' => RoleTypeEnum::SUPER_ADMIN->getValue(),
         ]);
 
-        // dd($this->companyRepository->findBy([], [], 1, 1)[0]);
-
         UserFactory::createMany(1, [
             'company_id' => $this->companyRepository->findBy([], [], 1, 1)[0]->getId(),
             'name' => Person::firstNameMale(),
