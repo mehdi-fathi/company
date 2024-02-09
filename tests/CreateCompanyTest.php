@@ -84,6 +84,65 @@ class CreateCompanyTest extends ApiTestCaseCustom
     }
 
 
+    public function testCreateCompanyValidationNameCount(): void
+    {
+        $name = "Ap";
+
+        $response = static::createClient()->request('POST', '/api/companies', [
+            'headers' => [
+                'CurrentUser' => $this->getSuperAdminId(),
+                'Content-Type' => 'application/ld+json',
+            ],
+            'json' => [
+                "name" => $name,
+            ]
+
+        ]);
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
+
+    }
+
+    public function testCreateCompanyValidationNameUnique(): void
+    {
+        $name = "Apple 2354";
+
+        CompanyFactory::createMany(1,['name' => $name]);
+
+        $response = static::createClient()->request('POST', '/api/companies', [
+            'headers' => [
+                'CurrentUser' => $this->getSuperAdminId(),
+                'Content-Type' => 'application/ld+json',
+            ],
+            'json' => [
+                "name" => $name,
+            ]
+
+        ]);
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
+
+    }
+
+
+    public function testCreateCompanyValidationNameBlank(): void
+    {
+
+        $response = static::createClient()->request('POST', '/api/companies', [
+            'headers' => [
+                'CurrentUser' => $this->getSuperAdminId(),
+                'Content-Type' => 'application/ld+json',
+            ],
+            'json' => [
+            ]
+
+        ]);
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
+
+    }
+
+
 }
 
 

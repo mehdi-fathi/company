@@ -29,7 +29,7 @@ class CreateUserDTO
      * @var int
      */
     #[ApiProperty(default: 1)]
-    #[AcmeAssert\UniqueForeignKey(foreignKey: "id", referencedEntity: "App/Entity/Company", entityName: "companies")]
+    #[AcmeAssert\ExistCompanyForeignKey(foreignKey: "id", entityName: "companies")]
     public int $company_id;
 
     /**

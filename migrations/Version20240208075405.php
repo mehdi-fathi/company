@@ -22,7 +22,7 @@ final class Version20240208075405 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         // Check if public schema exists
         // $this->addSql('CREATE SCHEMA IF NOT EXISTS public;');
-        $this->addSql('CREATE TABLE "companies" (id SERIAL NOT NULL, name VARCHAR(100) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE "companies" (id SERIAL NOT NULL, name VARCHAR(100) NOT NULL, PRIMARY KEY(id),unique (name))');
         $this->addSql('CREATE TABLE "users" (id SERIAL NOT NULL, name VARCHAR(100) NOT NULL, role VARCHAR(50) NOT NULL, company_id INT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('create index users_company_id_index on users (company_id);');
     }

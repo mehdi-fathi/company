@@ -7,26 +7,20 @@ use Symfony\Component\Validator\Constraint;
 /**
  *
  */
-#[\Attribute] class UniqueForeignKey extends Constraint
+#[\Attribute] class UniqueCompanyName extends Constraint
 {
     /**
      * @var string
      */
-    public $message = '{{ value }} does not exist in {{ entityName }}.';
+    public $message = '{{ value }} saved before and you are not able to insert duplicated company name.';
 
 
     /**
-     * @param string $foreignKey
-     * @param $referencedEntity
-     * @param string $entityName
      * @param array|null $groups
      * @param mixed|null $payload
      */
     #[HasNamedArguments]
     public function __construct(
-        public string $foreignKey,
-        public        $referencedEntity,
-        public string $entityName,
         array         $groups = null,
         mixed         $payload = null,
     )
@@ -39,7 +33,7 @@ use Symfony\Component\Validator\Constraint;
      */
     public function validatedBy()
     {
-        return UniqueForeignKeyValidator::class;
+        return UniqueCompanyNameValidator::class;
     }
 
 }

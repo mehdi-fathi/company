@@ -10,7 +10,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 /**
  *
  */
-class UniqueForeignKeyValidator extends ConstraintValidator
+class UniqueCompanyNameValidator extends ConstraintValidator
 {
 
     /**
@@ -28,18 +28,13 @@ class UniqueForeignKeyValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
 
-        if (!$constraint->foreignKey || !$constraint->referencedEntity) {
-            throw new \InvalidArgumentException('You must specify both "foreignKey" and "referencedEntity" properties.');
-        }
+        $referencedEntity = $this->companyRepository->findOneBy(['name' => $value]);
 
-        $referencedEntity = $this->companyRepository->findOneBy([$constraint->foreignKey => $value]);
-
-        if (!$referencedEntity) {
+        if ($referencedEntity) {
 
             // the argument must be a string or an object implementing __toString()
             $this->context->buildViolation($constraint->message)
                 ->setParameter("{{ value }}", $value)
-                ->setParameter("{{ entityName }}", $constraint->entityName)
                 ->addViolation();
         }
     }
