@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\Entity\Enum\RoleTypeEnum;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,6 +19,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
 {
+    const PAGINATOR_PER_PAGE = 10;
 
     /**
      * @param \Doctrine\Persistence\ManagerRegistry $registry
@@ -30,13 +33,15 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
     /**
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function findByUserRelatedCompany(int $user_id, int $company_id): ?User
+    public function findByUserRelatedCompany(int $userId, int $companyId): ?User
     {
         return $this->createQueryBuilder('u')
             ->andWhere('u.id = :i_user_id')
             ->andWhere('u.company_id = :i_company_id')
-            ->setParameter('i_company_id', $company_id)
-            ->setParameter('i_user_id', $user_id)
+            ->andWhere('u.role = :i_role')
+            ->setParameter('i_role', RoleTypeEnum::USER->getValue())
+            ->setParameter('i_company_id', $companyId)
+            ->setParameter('i_user_id', $userId)
             ->getQuery()
             ->getOneOrNullResult();
     }
@@ -83,6 +88,40 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
             $this->entityManager->flush();
         }
 
+    }
+
+    public function getAllPaginated(int $page = 1)
+    {
+        $offset = 0;
+        if ($page > 1) {
+            $offset = (($page - 1) * self::PAGINATOR_PER_PAGE);
+        }
+        $query = $this->createQueryBuilder('u')
+            ->orderBy('u.id', 'DESC')
+            ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setFirstResult($offset)
+            ->getQuery();
+
+        return new Paginator($query);
+    }
+
+    public function getUserRelatedCompanyPaginated(int $companyId, int $page = 1)
+    {
+        $offset = 0;
+        if ($page > 1) {
+            $offset = (($page - 1) * self::PAGINATOR_PER_PAGE);
+        }
+        $query = $this->createQueryBuilder('u')
+            ->orderBy('u.id', 'DESC')
+            ->andWhere('u.company_id = :i_company_id')
+            ->andWhere('u.role = :i_role')
+            ->setParameter('i_company_id', $companyId)
+            ->setParameter('i_role', RoleTypeEnum::USER->getValue())
+            ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setFirstResult($offset)
+            ->getQuery();
+
+        return new Paginator($query);
     }
 
 }

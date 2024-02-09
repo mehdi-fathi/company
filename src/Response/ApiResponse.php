@@ -7,7 +7,7 @@ class ApiResponse
 {
     // ... (setters and getters)
 
-    public static function getResponse(bool $success, string $message = null, $data = null, string $error = null): array
+    public static function getResponse(bool $success, string $message = null, $data = null, string $error = null, array $links = null): array
     {
 
         $out['success'] = $success;
@@ -20,6 +20,10 @@ class ApiResponse
         }
         if (!empty($data)) {
             $out['data'] = $data;
+        }
+
+        if (!empty($links)) {
+            $out['links'] = $links;
         }
 
         return $out;

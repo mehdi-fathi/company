@@ -51,6 +51,19 @@ final class UserService
     }
 
     /**
+     */
+    public function paginateUsers(string $currentUserRole, string $currentUserCompanyId, int $page = 1)
+    {
+        if (HelperService::isRoleSuperAdmin($currentUserRole)) {
+            $userData = $this->userRepository->getAllPaginated($page);
+        } else {
+            $userData = $this->userRepository->getUserRelatedCompanyPaginated($currentUserCompanyId, $page);
+        }
+
+        return $userData;
+    }
+
+    /**
      * @param string $name
      * @param int $companyId
      * @param string $role

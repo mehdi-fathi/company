@@ -10,10 +10,10 @@ interface UserRepositoryInterface
 {
 
     /**
-     * @param int $user_id
-     * @param int $company_id
+     * @param int $userId
+     * @param int $companyId
      * @return \App\Repository\User|null
      */
-    public function findByUserRelatedCompany(int $user_id, int $company_id): ?User;
+    public function findByUserRelatedCompany(int $userId, int $companyId): ?User;
 
 }

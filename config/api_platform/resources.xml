@@ -33,6 +33,11 @@
                        uriTemplate="/users/{id}"
                        controller="App\Controller\User\DeleteUser"
             />
+
+            <operation class="ApiPlatform\Metadata\GetCollection"
+                       name="get_user_list"
+                       uriTemplate="/users"
+                       controller="App\Controller\User\ListUser"/>
         </operations>
         <normalizationContext>
             <values>
