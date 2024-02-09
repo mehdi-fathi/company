@@ -3,11 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Company;
-use App\Entity\Enum\RoleTypeEnum;
-use App\Entity\User;
 use App\Repository\CompanyRepository;
-use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
 
 /**
  *

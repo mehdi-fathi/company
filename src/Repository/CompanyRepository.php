@@ -18,8 +18,15 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CompanyRepository extends ServiceEntityRepository
 {
+    /**
+     *
+     */
     const PAGINATOR_PER_PAGE = 5;
 
+    /**
+     * @param \Doctrine\Persistence\ManagerRegistry $registry
+     * @param \Doctrine\ORM\EntityManagerInterface $entityManager
+     */
     public function __construct(ManagerRegistry $registry, private EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Company::class);
@@ -28,8 +35,6 @@ class CompanyRepository extends ServiceEntityRepository
 
     /**
      * @param string $name
-     * @param int $companyId
-     * @param string $role
      * @return void
      */
     public function create(string $name)
@@ -53,6 +58,10 @@ class CompanyRepository extends ServiceEntityRepository
     }
 
 
+    /**
+     * @param int $page
+     * @return \Doctrine\ORM\Tools\Pagination\Paginator
+     */
     public function getAllPaginated(int $page = 1)
     {
         $offset = 0;

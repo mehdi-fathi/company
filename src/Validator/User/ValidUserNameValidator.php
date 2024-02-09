@@ -1,9 +1,8 @@
 <?php
 
 
-namespace App\Validator;
+namespace App\Validator\User;
 
-use App\Repository\CompanyRepository;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 

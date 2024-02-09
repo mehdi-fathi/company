@@ -3,14 +3,9 @@
 namespace App\Dto;
 
 
-use App\Entity\Enum\RoleTypeEnum;
-use App\Service\HelperService;
-use App\Service\UserContextInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-
-use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\ApiProperty;
 use App\Validator as AcmeAssert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -23,14 +18,14 @@ class CreateUserDTO
     #[Assert\NotBlank(message: "Name cannot be blank.")]
     #[Assert\Type('string')]
     #[Assert\Length(min: 3, max: 100, exactMessage: "Name cannot be blank.")]
-    #[AcmeAssert\ValidUserName()]
+    #[AcmeAssert\User\ValidUserName()]
     public string $name;
 
     /**
      * @var int
      */
     #[ApiProperty(default: 1)]
-    #[AcmeAssert\ExistCompanyForeignKey(foreignKey: "id", entityName: "companies")]
+    #[AcmeAssert\Company\ExistCompanyForeignKey(foreignKey: "id", entityName: "companies")]
     public int $company_id;
 
     /**

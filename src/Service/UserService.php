@@ -2,10 +2,8 @@
 
 namespace App\Service;
 
-use App\Entity\Enum\RoleTypeEnum;
 use App\Entity\User;
 use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
 
 /**
  *

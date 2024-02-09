@@ -6,7 +6,6 @@ use App\Response\ApiResponse;
 use App\Serializer\ApiResponseSerializer;
 use App\Service\CompanyService;
 use App\Service\UserContextInterface;
-use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\AsController;

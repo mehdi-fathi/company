@@ -17,8 +17,11 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method User[]    findAll()
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
+class UserRepository extends ServiceEntityRepository
 {
+    /**
+     *
+     */
     const PAGINATOR_PER_PAGE = 10;
 
     /**
@@ -90,6 +93,10 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
 
     }
 
+    /**
+     * @param int $page
+     * @return \Doctrine\ORM\Tools\Pagination\Paginator
+     */
     public function getAllPaginated(int $page = 1)
     {
         $offset = 0;
@@ -105,6 +112,11 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
         return new Paginator($query);
     }
 
+    /**
+     * @param int $companyId
+     * @param int $page
+     * @return \Doctrine\ORM\Tools\Pagination\Paginator
+     */
     public function getUserRelatedCompanyPaginated(int $companyId, int $page = 1)
     {
         $offset = 0;
