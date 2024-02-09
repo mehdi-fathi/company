@@ -12,17 +12,17 @@ class User
 {
     #[ORM\Id]
     #[ORM\Column(type: "integer")]
-    #[ORM\GeneratedValue(strategy : "SEQUENCE")]
+    #[ORM\GeneratedValue(strategy: "SEQUENCE")]
     private int $id;
 
     #[ORM\Column(length: 100)]
-    private ?string $name = null;
+    private string $name;
 
     #[ORM\Column(type: "string")]
     private string $role;
 
     #[ORM\Column]
-    private ?int $company_id = null;
+    private ?int $company_id = 0;
 
     public function getId(): ?int
     {

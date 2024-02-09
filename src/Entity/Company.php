@@ -12,10 +12,10 @@ class Company
     #[ORM\Id]
     #[ORM\Column(type: "integer")]
     #[ORM\GeneratedValue(strategy : "SEQUENCE")]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\Column(length: 100)]
-    private ?string $name = null;
+    private string $name;
 
     public function getId(): ?int
     {

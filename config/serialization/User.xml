@@ -7,5 +7,11 @@
         <attribute name="name">
             <group>get</group>
         </attribute>
+        <attribute name="company_id">
+            <group>get</group>
+        </attribute>
+        <attribute name="role">
+            <group>get</group>
+        </attribute>
     </class>
 </serializer>
