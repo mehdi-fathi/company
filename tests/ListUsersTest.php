@@ -100,15 +100,17 @@ class ListUsersTest extends ApiTestCaseCustom
 
     public function testCantFindUserCompanyByOtherCompanyAdmin(): void
     {
+        UserFactory::createMany(2);
+
         UserFactory::createMany(1, [
             'company_id' => 2,
-            'name' => 'company admin 2',
+            'name' => 'company admin 3',
             'role' => RoleTypeEnum::COMPANY_ADMIN->getValue(),
         ]);
 
         $response = static::createClient()->request('GET', '/api/users', [
             'headers' => [
-                'CurrentUser' => UserFactory::findBy(['name' => 'company admin 2'])[0]->getId(),
+                'CurrentUser' => UserFactory::findBy(['name' => 'company admin 3'])[0]->getId(),
                 'Content-Type' => 'application/ld+json',
             ],
             'query' => [

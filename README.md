@@ -17,7 +17,7 @@ This project is a RESTful API for some operations related companies and users.
 
         $ symfony serve
 
-- documentation `http://127.0.0.1:8000/api`
+- Check this link : `http://127.0.0.1:8000/api`
 
 ### For running all tests
 
