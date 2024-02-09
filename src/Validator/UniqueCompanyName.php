@@ -31,7 +31,7 @@ use Symfony\Component\Validator\Constraint;
     /**
      * @return string
      */
-    public function validatedBy()
+    public function validatedBy(): string
     {
         return UniqueCompanyNameValidator::class;
     }

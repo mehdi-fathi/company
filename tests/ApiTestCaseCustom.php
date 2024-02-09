@@ -5,6 +5,7 @@ namespace App\Tests;
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use App\Entity\Enum\RoleTypeEnum;
 use App\Factory\UserFactory;
+use Faker\Provider\en_IN\Person;
 
 class ApiTestCaseCustom extends ApiTestCase
 {
@@ -23,5 +24,10 @@ class ApiTestCaseCustom extends ApiTestCase
     protected function getUserId()
     {
         return UserFactory::find(['role' => RoleTypeEnum::USER->getValue()])->getId();
+    }
+
+    protected function getUserNameValid()
+    {
+        return Person::firstNameFemale() . ' ' . Person::firstNameMale();
     }
 }

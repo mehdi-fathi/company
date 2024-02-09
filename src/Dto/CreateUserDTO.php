@@ -23,6 +23,7 @@ class CreateUserDTO
     #[Assert\NotBlank(message: "Name cannot be blank.")]
     #[Assert\Type('string')]
     #[Assert\Length(min: 3, max: 100, exactMessage: "Name cannot be blank.")]
+    #[AcmeAssert\ValidUserName()]
     public string $name;
 
     /**

@@ -54,7 +54,7 @@ class CreateUserTest extends ApiTestCaseCustom
                 'Content-Type' => 'application/ld+json',
             ],
             'json' => [
-                "name" => "Mehdi",
+                "name" => $this->getUserNameValid(),
                 "company_id" => CompanyFactory::first()->getId(),
                 'role' => RoleTypeEnum::USER->getValue(),
             ]
@@ -65,7 +65,58 @@ class CreateUserTest extends ApiTestCaseCustom
         $this->assertResponseIsSuccessful();
     }
 
-    public function testCreateUserNameValidation(): void
+    public function testCreateUserNameValidValidation(): void
+    {
+        CompanyFactory::createMany(1);
+
+        static::createClient()->request('POST', '/api/users', [
+            'headers' => [
+                'CurrentUser' => $this->getSuperAdminId(),
+                'Content-Type' => 'application/ld+json',
+            ],
+            'json' => [
+                "name" => "Jax",
+                "company_id" => CompanyFactory::first()->getId(),
+                'role' => RoleTypeEnum::USER->getValue(),
+            ]
+
+        ]);
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
+
+        static::createClient()->request('POST', '/api/users', [
+            'headers' => [
+                'CurrentUser' => $this->getSuperAdminId(),
+                'Content-Type' => 'application/ld+json',
+            ],
+            'json' => [
+                "name" => "jax",
+                "company_id" => CompanyFactory::first()->getId(),
+                'role' => RoleTypeEnum::USER->getValue(),
+            ]
+
+        ]);
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
+
+        static::createClient()->request('POST', '/api/users', [
+            'headers' => [
+                'CurrentUser' => $this->getSuperAdminId(),
+                'Content-Type' => 'application/ld+json',
+            ],
+            'json' => [
+                "name" => "steve jobs",
+                "company_id" => CompanyFactory::first()->getId(),
+                'role' => RoleTypeEnum::USER->getValue(),
+            ]
+
+        ]);
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+
+    public function testCreateUserNameCountValidation(): void
     {
         CompanyFactory::createMany(1);
 
@@ -94,7 +145,7 @@ class CreateUserTest extends ApiTestCaseCustom
                 'Content-Type' => 'application/ld+json',
             ],
             'json' => [
-                "name" => "mehdi",
+                "name" => $this->getUserNameValid(),
                 "company_id" => 999,
                 'role' => RoleTypeEnum::USER->getValue(),
             ]
@@ -112,7 +163,7 @@ class CreateUserTest extends ApiTestCaseCustom
                 'Content-Type' => 'application/ld+json',
             ],
             'json' => [
-                "name" => "mehdi",
+                "name" => $this->getUserNameValid(),
                 "company_id" => CompanyFactory::first()->getId()
             ]
 
@@ -129,7 +180,7 @@ class CreateUserTest extends ApiTestCaseCustom
                 'Content-Type' => 'application/ld+json',
             ],
             'json' => [
-                "name" => "mehdi",
+                "name" => $this->getUserNameValid(),
                 "company_id" => CompanyFactory::first()->getId()
             ]
         ]);
