@@ -44,7 +44,7 @@ class ListUsers extends AbstractController
             $next = $this->generateUrl('get_user_list', ['page' => $next_page]);
         }
 
-        if (empty($users)) {
+        if (empty($users->count())) {
             HelperService::notFoundException();
         }
 

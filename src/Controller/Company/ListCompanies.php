@@ -40,7 +40,7 @@ class ListCompanies extends AbstractController
             $next = $this->generateUrl('get_companies_list', ['page' => $next_page]);
         }
 
-        if (empty($companies)) {
+        if (empty($companies->count())) {
             HelperService::notFoundException();
         }
 
