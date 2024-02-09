@@ -25,7 +25,7 @@ class FindCompanyTest extends ApiTestCaseCustom
 
         $response = static::createClient()->request('GET', '/api/companies/' . $companyId, [
             'headers' => [
-                'CurrentUser' => 1,
+                'CurrentUser' => $this->getCompanyAdminId(),
                 'Content-Type' => 'application/ld+json',
             ]
         ]);

@@ -5,6 +5,7 @@ namespace App\Tests;
 
 use App\Entity\Enum\RoleTypeEnum;
 use App\Factory\CompanyFactory;
+use App\Factory\UserFactory;
 use Symfony\Component\HttpFoundation\Response;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
@@ -19,21 +20,24 @@ class CreateUserTest extends ApiTestCaseCustom
     {
         CompanyFactory::createMany(1);
 
+        $name = $this->getUserNameValid();
+
         $response = static::createClient()->request('POST', '/api/users', [
             'headers' => [
-                'CurrentUser' => 1,
+                'CurrentUser' => $this->getSuperAdminId(),
                 'Content-Type' => 'application/ld+json',
             ],
             'json' => [
-                "name" => $this->getUserNameValid(),
+                "name" => $name,
                 "company_id" => CompanyFactory::first()->getId(),
                 'role' => RoleTypeEnum::USER->getValue(),
             ]
 
         ]);
 
-
         $this->assertResponseIsSuccessful();
+        $this->assertSame($name, UserFactory::find(['name' => $name])->getName());
+
     }
 
     public function testCreateUserNameValidValidation(): void
