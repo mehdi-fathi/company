@@ -13,7 +13,7 @@ I assumed this project would be a large scale project, so I tried to implement r
 - PHP : 8.1
 - Symfony : 6.4.*
 
-## Install
+## Install``
 
         $ composer install
         $ bin/console doctrine:migrations:migrate
@@ -22,6 +22,6 @@ I assumed this project would be a large scale project, so I tried to implement r
 
 - documentation `http://127.0.0.1:8000/api`
 
-### For run all tests
+### For running all tests
 
     $ composer test
