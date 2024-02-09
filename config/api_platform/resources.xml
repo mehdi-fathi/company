@@ -37,7 +37,7 @@
             <operation class="ApiPlatform\Metadata\GetCollection"
                        name="get_user_list"
                        uriTemplate="/users"
-                       controller="App\Controller\User\ListUser"/>
+                       controller="App\Controller\User\ListUsers"/>
         </operations>
         <normalizationContext>
             <values>
@@ -56,6 +56,10 @@
                        name="get_company"
                        uriTemplate="/companies/{id}"
                        controller="App\Controller\Company\FindCompanyById"/>
+            <operation class="ApiPlatform\Metadata\GetCollection"
+                       name="get_companies_list"
+                       uriTemplate="/companies"
+                       controller="App\Controller\Company\ListCompanies"/>
             <operation class="ApiPlatform\Metadata\Post"
                        name="create_company"
                        uriTemplate="/companies"

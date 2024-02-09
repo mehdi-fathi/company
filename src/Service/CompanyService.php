@@ -43,11 +43,12 @@ final class CompanyService
     }
 
     /**
-     * @param $id
-     * @return bool
      */
-    public function delete($id): bool
+    public function paginateCompanies(int $page = 1)
     {
-        return $this->companyRepository->delete($id);
+        $companiesData = $this->companyRepository->getAllPaginated($page);
+
+        return $companiesData;
     }
+
 }

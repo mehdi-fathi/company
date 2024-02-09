@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Controller\User;
+namespace App\Controller\Company;
 
-use App\Repository\UserRepository;
+use App\Repository\CompanyRepository;
 use App\Response\ApiResponse;
 use App\Serializer\ApiResponseSerializer;
+use App\Service\CompanyService;
 use App\Service\HelperService;
 use App\Service\UserContextInterface;
-use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\AsController;
@@ -15,13 +15,12 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 #[AsController]
-class ListUser extends AbstractController
+class ListCompanies extends AbstractController
 {
 
-    public function __construct(
-        private UserService          $userService,
-        private SerializerInterface  $serializer,
-        private UserContextInterface $userContext
+    public function __construct(private CompanyService       $companyService,
+                                private SerializerInterface  $serializer,
+                                private UserContextInterface $userContext
     )
     {
 
@@ -31,25 +30,22 @@ class ListUser extends AbstractController
     {
         $page = max(1, $request->query->getInt('page', 0));
 
-        $currentUser = $this->userContext->getCurrentUser();
-        $users = $this->userService->paginateUsers(
-            $currentUser->getRole(),
-            $currentUser->getCompanyId(),
+        $companies = $this->companyService->paginateCompanies(
             $page,
         );
 
         $next = null;
-        if ($users->count() > $page * UserRepository::PAGINATOR_PER_PAGE) {
+        if ($companies->count() > $page * CompanyRepository::PAGINATOR_PER_PAGE) {
             $next_page = $page + 1;
-            $next = $this->generateUrl('get_user_list', ['page' => $next_page]);
+            $next = $this->generateUrl('get_companies_list', ['page' => $next_page]);
         }
 
-        if (empty($users)) {
+        if (empty($companies)) {
             HelperService::notFoundException();
         }
 
         $res = ApiResponse::getResponse(
-            true, '', $users, null,
+            true, '', $companies, null,
             [
                 'next' => $next
             ]

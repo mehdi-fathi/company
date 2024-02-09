@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Company;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +18,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CompanyRepository extends ServiceEntityRepository
 {
+    const PAGINATOR_PER_PAGE = 5;
+
     public function __construct(ManagerRegistry $registry, private EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Company::class);
@@ -47,6 +50,22 @@ class CompanyRepository extends ServiceEntityRepository
     {
         $this->entityManager->persist($company);
         $this->entityManager->flush();
+    }
+
+
+    public function getAllPaginated(int $page = 1)
+    {
+        $offset = 0;
+        if ($page > 1) {
+            $offset = (($page - 1) * self::PAGINATOR_PER_PAGE);
+        }
+        $query = $this->createQueryBuilder('c')
+            ->orderBy('c.id', 'DESC')
+            ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setFirstResult($offset)
+            ->getQuery();
+
+        return new Paginator($query);
     }
 
     //    /**
