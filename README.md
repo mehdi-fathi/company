@@ -7,7 +7,7 @@ This project is a restfull api for some operation related companies and users.
 - PHP : 8.1
 - Symfony : 6.4.*
 
-## Install``
+## Install
 
         $ composer install
         $ bin/console doctrine:migrations:migrate
