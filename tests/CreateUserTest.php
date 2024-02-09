@@ -2,11 +2,9 @@
 
 namespace App\Tests;
 
-use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 
 use App\Entity\Enum\RoleTypeEnum;
 use App\Factory\CompanyFactory;
-use App\Factory\UserFactory;
 use Symfony\Component\HttpFoundation\Response;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;

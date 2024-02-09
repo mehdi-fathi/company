@@ -25,5 +25,7 @@ services:
     App\EventListener\NotFoundAccessExceptionListener:
         tags:
             - { name: 'kernel.event_listener', event: 'kernel.exception', method: 'onKernelException' }
+    Psr\Log\NullLogger: ~
+    logger: '@Psr\Log\NullLogger'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
