@@ -47,7 +47,7 @@ final class CompanyFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'name' => self::faker()->company(),
+            'name' => self::faker()->company() . '-' . self::faker()->companySuffix(). '-' . self::faker()->citySuffix(),
         ];
     }
 
@@ -56,9 +56,7 @@ final class CompanyFactory extends ModelFactory
      */
     protected function initialize(): self
     {
-        return $this
-            // ->afterInstantiate(function(Company $company): void {})
-        ;
+        return $this;
     }
 
     protected static function getClass(): string
