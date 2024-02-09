@@ -91,4 +91,14 @@ final class HelperService
             throw new AccessDeniedException();
         }
     }
+
+
+    /**
+     * @param string|null $msg
+     * @return void
+     */
+    public static function notFoundException(?string $msg = 'Not found'): void
+    {
+        throw new AccessDeniedException();
+    }
 }

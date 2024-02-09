@@ -36,10 +36,10 @@ final class UserService
      * @param int $userId
      * @param string $currentUserRole
      * @param string $currentUserCompanyId
-     * @return \App\Entity\User
+     * @return \App\Entity\User|null
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function findUserByIdBasedRole(int $userId, string $currentUserRole, string $currentUserCompanyId): User
+    public function findUserByIdBasedRole(int $userId, string $currentUserRole, string $currentUserCompanyId): ?User
     {
         if (HelperService::isRoleSuperAdmin($currentUserRole)) {
             $userData = $this->userRepository->find($userId);
@@ -69,10 +69,10 @@ final class UserService
 
     /**
      * @param $id
-     * @return bool
+     * @return void
      */
-    public function delete($id): bool
+    public function delete($id)
     {
-        return $this->userRepository->delete($id);
+        $this->userRepository->delete($id);
     }
 }

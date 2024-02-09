@@ -4,6 +4,7 @@ namespace App\Controller\User;
 
 use App\Response\ApiResponse;
 use App\Serializer\ApiResponseSerializer;
+use App\Service\HelperService;
 use App\Service\UserContextInterface;
 use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,6 +35,10 @@ class FindUserById extends AbstractController
             $currentUser->getRole(),
             $currentUser->getCompanyId(),
         );
+
+        if(empty($user)){
+            HelperService::notFoundException();
+        }
 
         $res = ApiResponse::getResponse(true, '', $user);
 
