@@ -49,7 +49,7 @@ final class UserFactory extends ModelFactory
     {
         return [
             'company_id' => self::faker()->randomNumber(),
-            'name' => self::faker()->firstName(),
+            'name' => self::faker()->firstName() . ' ' . self::faker()->lastName(),
             'role' => RoleTypeEnum::USER->getValue(),
         ];
     }
@@ -59,9 +59,7 @@ final class UserFactory extends ModelFactory
      */
     protected function initialize(): self
     {
-        return $this
-            // ->afterInstantiate(function(User $user): void {})
-        ;
+        return $this;
     }
 
     protected static function getClass(): string

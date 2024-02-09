@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class CreateUserDTO
 {
 
-    #[ApiProperty(default: "Mehdi")]
+    #[ApiProperty(default: "Mehdi Fathi")]
     #[Assert\NotBlank(message: "Name cannot be blank.")]
     #[Assert\Type('string')]
     #[Assert\Length(min: 3, max: 100, exactMessage: "Name cannot be blank.")]
