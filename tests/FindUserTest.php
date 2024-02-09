@@ -53,7 +53,7 @@ class FindUserTest extends ApiTestCaseCustom
     public function testCantFindUserCompanyByOtherCompanyAdmin(): void
     {
         UserFactory::createMany(1, [
-            'company_id' => 2,
+            'company_id' => 25,
             'name' => 'company admin 2',
             'role' => RoleTypeEnum::COMPANY_ADMIN->getValue(),
         ]);
