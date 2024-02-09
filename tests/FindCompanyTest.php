@@ -18,37 +18,6 @@ class FindCompanyTest extends ApiTestCaseCustom
 {
     use  ResetDatabase, Factories;
 
-    public function setUp(): void
-    {
-
-        parent::setUp();
-
-        CompanyFactory::createMany(1);
-
-        UserFactory::createMany(1, [
-            'company_id' => 0,
-            'name' => 'admin',
-            'role' => RoleTypeEnum::SUPER_ADMIN->getValue(),
-        ]);
-
-        CompanyFactory::createMany(1);
-
-        $companyId = CompanyFactory::first()->getId();
-
-        UserFactory::createMany(1, [
-            'company_id' => $companyId,
-            'name' => 'company admin',
-            'role' => RoleTypeEnum::COMPANY_ADMIN->getValue(),
-        ]);
-
-        UserFactory::createMany(1, [
-            'company_id' => $companyId,
-            'name' => 'user',
-            'role' => RoleTypeEnum::USER->getValue(),
-        ]);
-
-
-    }
 
     public function testFindCompanyById(): void
     {

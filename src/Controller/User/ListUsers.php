@@ -49,8 +49,9 @@ class ListUsers extends AbstractController
         }
 
         $res = ApiResponse::getResponse(
-            true, '', $users, null,
-            [
+            success: true,
+            data: $users,
+            links: [
                 'next' => $next
             ]
         );

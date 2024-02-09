@@ -2,7 +2,6 @@
 
 namespace App\Tests;
 
-use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 
 use App\Entity\Enum\RoleTypeEnum;
 use App\Factory\CompanyFactory;
@@ -16,33 +15,6 @@ class CreateCompanyTest extends ApiTestCaseCustom
 {
     use  ResetDatabase, Factories;
 
-    public function setUp(): void
-    {
-
-        parent::setUp();
-
-        UserFactory::createMany(1, [
-            'company_id' => 0,
-            'name' => 'admin',
-            'role' => RoleTypeEnum::SUPER_ADMIN->getValue(),
-        ]);
-
-        CompanyFactory::createMany(1);
-
-        $companyId = CompanyFactory::first()->getId();
-
-        UserFactory::createMany(1, [
-            'company_id' => $companyId,
-            'name' => 'company admin',
-            'role' => RoleTypeEnum::COMPANY_ADMIN->getValue(),
-        ]);
-
-        UserFactory::createMany(1, [
-            'company_id' => $companyId,
-            'name' => 'user',
-            'role' => RoleTypeEnum::USER->getValue(),
-        ]);
-    }
 
     public function testCreateCompanySuccess(): void
     {
@@ -83,7 +55,6 @@ class CreateCompanyTest extends ApiTestCaseCustom
 
     }
 
-
     public function testCreateCompanyValidationNameCount(): void
     {
         $name = "Ap";
@@ -107,7 +78,7 @@ class CreateCompanyTest extends ApiTestCaseCustom
     {
         $name = "Apple 2354";
 
-        CompanyFactory::createMany(1,['name' => $name]);
+        CompanyFactory::createMany(1, ['name' => $name]);
 
         $response = static::createClient()->request('POST', '/api/companies', [
             'headers' => [

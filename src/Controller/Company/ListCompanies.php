@@ -45,8 +45,9 @@ class ListCompanies extends AbstractController
         }
 
         $res = ApiResponse::getResponse(
-            true, '', $companies, null,
-            [
+            success: true,
+            data: $companies,
+            links: [
                 'next' => $next
             ]
         );

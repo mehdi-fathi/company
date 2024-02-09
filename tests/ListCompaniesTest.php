@@ -18,19 +18,6 @@ class ListCompaniesTest extends ApiTestCaseCustom
 {
     use  ResetDatabase, Factories;
 
-    public function setUp(): void
-    {
-
-        parent::setUp();
-
-        UserFactory::createMany(1, [
-            'company_id' => 0,
-            'name' => 'admin',
-            'role' => RoleTypeEnum::SUPER_ADMIN->getValue(),
-        ]);
-
-    }
-
     public function testListCompanies(): void
     {
         CompanyFactory::createMany(11);

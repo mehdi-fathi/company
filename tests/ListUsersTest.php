@@ -19,7 +19,6 @@ class ListUsersTest extends ApiTestCaseCustom
 
     public function setUp(): void
     {
-
         parent::setUp();
 
         UserFactory::createMany(1, [
