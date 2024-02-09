@@ -103,7 +103,7 @@ class ListUsersTest extends ApiTestCaseCustom
         UserFactory::createMany(2);
 
         UserFactory::createMany(1, [
-            'company_id' => 25,
+            'company_id' => 24,
             'name' => 'company admin 3',
             'role' => RoleTypeEnum::COMPANY_ADMIN->getValue(),
         ]);
