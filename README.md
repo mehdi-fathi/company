@@ -10,8 +10,11 @@ This project is a RESTful API for some operations related companies and users.
 ## Install
 
         $ composer install
+
         $ bin/console doctrine:migrations:migrate
+
         $ bin/console doctrine:fixtures:load
+
         $ symfony serve
 
 - documentation `http://127.0.0.1:8000/api`
