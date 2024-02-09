@@ -85,15 +85,16 @@ class FindUserTest extends ApiTestCase
             'role' => RoleTypeEnum::COMPANY_ADMIN->getValue(),
         ]);
 
+        // dd(UserFactory::findBy(['name' => 'company admin 2'])[0]);
+
         $response = static::createClient()->request('GET', '/api/users/' . $this->getUserId(), [
             'headers' => [
-                'CurrentUser' => UserFactory::last()->getId(),
+                'CurrentUser' => UserFactory::findBy(['name' => 'company admin 2'])[0]->getId(),
                 'Content-Type' => 'application/ld+json',
             ],
         ]);
 
-
-        $this->assertResponseStatusCodeSame(Response::HTTP_UNAUTHORIZED);
+        $this->assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND);
 
     }
 

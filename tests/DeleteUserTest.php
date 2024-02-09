@@ -63,6 +63,23 @@ class DeleteUserTest extends ApiTestCase
 
     }
 
+    public function testOthersCantAccess(): void
+    {
+        CompanyFactory::createMany(1);
+
+        $userId = $this->getUserId();
+
+        $response = static::createClient()->request('DELETE', '/api/users/' . $userId, [
+            'headers' => [
+                'CurrentUser' => $this->getCompanyAdminId(),
+                'Content-Type' => 'application/ld+json',
+            ],
+        ]);
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNAUTHORIZED);
+
+    }
+
     private function getSuperAdminId()
     {
         return UserFactory::find(['role' => RoleTypeEnum::SUPER_ADMIN->getValue()])->getId();

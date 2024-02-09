@@ -56,7 +56,7 @@ class CreateUserTest extends ApiTestCase
             'json' => [
                 "name" => "Mehdi",
                 "company_id" => CompanyFactory::first()->getId(),
-                "role" => "user"
+                'role' => RoleTypeEnum::USER->getValue(),
             ]
 
         ]);
@@ -77,7 +77,7 @@ class CreateUserTest extends ApiTestCase
             'json' => [
                 "name" => "j",
                 "company_id" => CompanyFactory::first()->getId(),
-                "role" => "user"
+                'role' => RoleTypeEnum::USER->getValue(),
             ]
 
         ]);
@@ -96,7 +96,7 @@ class CreateUserTest extends ApiTestCase
             'json' => [
                 "name" => "mehdi",
                 "company_id" => 999,
-                "role" => "user"
+                'role' => RoleTypeEnum::USER->getValue(),
             ]
 
         ]);

@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\Enum\RoleTypeEnum;
 use App\Exception\AccessDeniedException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  *
@@ -99,6 +100,6 @@ final class HelperService
      */
     public static function notFoundException(?string $msg = 'Not found'): void
     {
-        throw new AccessDeniedException();
+        throw new NotFoundHttpException();
     }
 }
