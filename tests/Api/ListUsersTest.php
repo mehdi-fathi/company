@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Tests;
-
-use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
+namespace App\Tests\Api;
 
 use App\Entity\Enum\RoleTypeEnum;
 use App\Entity\User;

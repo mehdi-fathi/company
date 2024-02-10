@@ -1,10 +1,7 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\Api;
 
-use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
-
-use App\Entity\Enum\RoleTypeEnum;
 use App\Factory\CompanyFactory;
 use App\Factory\UserFactory;
 use Symfony\Component\HttpFoundation\Response;
